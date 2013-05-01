@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Who is not following me?</h1>
+        <p>Click the button below to authenticate with
+        your Twitter account and find out who you are following but is
+        not following you back.</p>
+        <a href="whosnotfollowingme" class="btn btn-primary">Go!</a>
+      </div>
+      <div class="hero-unit">
+         <p>Or insert your username here and click go
+            to find out who is following you while you are not
+            following them! No authentication required.</p>
+          <form class="form-inline" action="/whofollowsme">
+            <input class="input-large" type="text" name="user"
+            placeholder="Type your username..."/>
+            <input class="btn btn-primary" type="submit" value="Go"/>
+          </form>
+       </div>
+      <center>
+        <footer>This site is powered by Clojure.</footer>
+        <a href="http://www.clojure.org">
+          <img src="img/clojure-icon.gif" alt="clojure logo"/>
+        </a>
+      </center>
+    </div>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

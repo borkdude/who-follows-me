@@ -1,0 +1,16 @@
+pom.xml
+*jar
+/lib/
+/classes/
+.lein-deps-sum
+.DS_Store
+/target/
+/resources/logs.txt
+.project
+/bin/
+.classpath
+.settings/ccw.repl.cmdhistory.prefs
+
+.lein-failures
+
+resources/app.config
