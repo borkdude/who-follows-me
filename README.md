@@ -5,8 +5,7 @@ them and vice versa.
 Written in Clojure with the Ring, Compojure, Twitter-api and Enlive
 libraries (see `project.clj`).
 
-This webapp is also hosted at this site:
-(http://twitter.michielborkent.nl). 
+This webapp is also hosted at this [site](http://twitter.michielborkent.nl). 
 
 ## Usage
 Adapt `resources/app.config` to your needs. 
