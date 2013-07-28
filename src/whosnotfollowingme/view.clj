@@ -51,9 +51,11 @@
 (defn logfile []
   (slurp *logfile*))
 
-(defn whofollowsme [user]
-  (log (str user " requested who is following him, but not vice versa on time " (java.util.Date.)));; insert log
-  (who-follows-me (followers-minus-friends user)))
+(defn whofollowsme [oauth-token-response]
+  (who-follows-me (followers-minus-friends *app-token* 
+                                           *app-secret* 
+                                           (:oauth_token oauth-token-response)
+                                           (:oauth_token_secret oauth-token-response))))
 
 ;; see https://github.com/mattrepl/clj-oauth how this works exactly
 (defn authorize [callback]
@@ -74,14 +76,12 @@
                       request-token
                       oauth-verifier))
 
-(defn whosnotfollowingme [oauth-token-response]
-  (do (log
-        (str " requested who is following him, but not vice versa on time " (java.util.Date.)))
-    (usernames-table-body
-      (doesnt-follow-me-back
-        *app-token*
-        *app-secret*
-        (:oauth_token oauth-token-response)
-        (:oauth_token_secret oauth-token-response)))))
+(defn whosnotfollowingme [oauth-token-response] 
+  (usernames-table-body
+    (doesnt-follow-me-back
+      *app-token*
+      *app-secret*
+      (:oauth_token oauth-token-response)
+      (:oauth_token_secret oauth-token-response))))
 
 

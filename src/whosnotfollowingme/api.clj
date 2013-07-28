@@ -13,20 +13,24 @@
 (defn- seq-to-comma-separated [vector]
   (string/join "," vector))
 
-(defn- userinfos [idset]
+(defn- userinfos [idset creds]
   (let [groups-of-100-ids (partition-all 100 idset)]
     ;; the api only allows 100 ids at a time
-    (mapcat #(:body (users-lookup :params {:user_id (seq-to-comma-separated %)}))
+    (mapcat #(:body (users-lookup :oauth-creds creds :params {:user_id (seq-to-comma-separated %)}))
             groups-of-100-ids)))
 
 (defn- idset [twitter-fn & args]
   (set (:ids (:body
                (apply twitter-fn args)))))
 
-(defn followers-minus-friends [screenname]
-  (let [difference-ids (difference (idset followers-ids :params {:screen-name screenname})
-                                   (idset friends-ids :params {:screen-name screenname}))
-        userinfos (userinfos difference-ids)]
+(defn followers-minus-friends [app-token app-secret user-token user-secret]
+  (let [creds (make-oauth-creds app-token
+                                app-secret
+                                user-token
+                                user-secret)
+        difference-ids (difference (idset followers-ids :oauth-creds creds)
+                                   (idset friends-ids :oauth-creds creds))
+        userinfos (userinfos difference-ids creds)]
     (map :screen_name userinfos)))
 
 (defn- friend-ids-by-auth [oauth-creds]
