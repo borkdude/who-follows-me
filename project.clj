@@ -1,10 +1,10 @@
- (defproject whosnotfollowingme "0.1.1"
+ (defproject whosnotfollowingme "0.1.2-SNAPSHOT"
    :description "FIXME: write this!"
    :dependencies [[org.clojure/clojure "1.5.1"]
                   [compojure "1.1.3"]
                   [ring/ring-jetty-adapter "1.1.6"]
                   [twitter-api "0.7.4"]
-                  ;; pulls in [clj-oauth "1.2.13"]
+                  ;; pulls in clj-oauth
                   [enlive "1.0.1"]]
                   ;;[me.raynes/laser "0.1.11"]  
    :ring {:handler whosnotfollowingme.handler/app}
