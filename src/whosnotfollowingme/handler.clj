@@ -33,4 +33,4 @@
     session/wrap-session))
 
 (defn -main [& args]
-  (run-jetty app {:port 8080}))
+  (run-jetty app {:port 8080 :join? false}))
