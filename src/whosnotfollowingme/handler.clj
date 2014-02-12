@@ -1,4 +1,5 @@
 (ns whosnotfollowingme.handler
+  (:gen-class)
   (:use compojure.core, ring.adapter.jetty)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
@@ -9,36 +10,36 @@
 (defroutes app-routes
   (GET "/" [] (view/welcome-page))
   (GET "/logs" [] {:status 200
-                   :header {"Content-Type" "text/plain"} 
+                   :header {"Content-Type" "text/plain"}
                    :body (view/logfile)})
   #_(GET "/whofollowsme" [user] (view/whofollowsme user))
   (GET "/whofollowsme" [oauth_token oauth_verifier :as {session :session}]
        (if (not (and oauth_token oauth_verifier))
         (resp/redirect "/whofollowsme/auth")
-         (let [access-token-response (view/access-token-response (session :consumer) 
+         (let [access-token-response (view/access-token-response (session :consumer)
                                                                  (session :request-token)
                                                                  oauth_verifier)]
             (view/whofollowsme access-token-response))))
   (GET "/whofollowsme/auth" {session :session headers :headers}
-       (let [[consumer-req twitter-url] (view/authorize 
+       (let [[consumer-req twitter-url] (view/authorize
                                           (str "http://" (headers "host") "/whofollowsme"))]
          {:session (merge session consumer-req)
-          :status 302 :headers {"Location" twitter-url} 
-          :body nil})) 
-  
+          :status 302 :headers {"Location" twitter-url}
+          :body nil}))
+
   (GET "/whosnotfollowingme" [oauth_token oauth_verifier :as {session :session}]
        (if (not (and oauth_token oauth_verifier))
          (resp/redirect "/whosnotfollowingme/auth")
-         (let [access-token-response (view/access-token-response (session :consumer) 
+         (let [access-token-response (view/access-token-response (session :consumer)
                                                                  (session :request-token)
                                                                  oauth_verifier)]
-           (view/whosnotfollowingme access-token-response))))   
+           (view/whosnotfollowingme access-token-response))))
   (GET "/whosnotfollowingme/auth" {session :session headers :headers}
-       (let [[consumer-req twitter-url] (view/authorize 
+       (let [[consumer-req twitter-url] (view/authorize
                                           (str "http://" (headers "host") "/whosnotfollowingme"))]
          {:session (merge session consumer-req)
-          :status 302 :headers {"Location" twitter-url} 
-          :body nil})) 
+          :status 302 :headers {"Location" twitter-url}
+          :body nil}))
   (route/resources "/")
   (route/not-found "Not Found"))
 
