@@ -5,7 +5,7 @@
             [net.cgrand.enlive-html :as enlive]
             #_[me.raynes.laser :as laser]
             :reload)
-  (:use 
+  (:use
     whosnotfollowingme.api
     [whosnotfollowingme.utils :only [log *logfile* *app-token* *app-secret*]]))
 
@@ -29,7 +29,7 @@
 ;; laser solution posted here: https://www.refheap.com/paste/8091
 #_(defn usernames-table-body [usernames]
   (let [html (slurp "resources/public/whoisnotfollowingme.html")]
-    (laser/document 
+    (laser/document
       (laser/parse html)
       (laser/child-of (laser/select-and (laser/element= :table)
                                         (laser/class= "names"))))))
@@ -52,8 +52,8 @@
   (slurp *logfile*))
 
 (defn whofollowsme [oauth-token-response]
-  (who-follows-me (followers-minus-friends *app-token* 
-                                           *app-secret* 
+  (who-follows-me (followers-minus-friends *app-token*
+                                           *app-secret*
                                            (:oauth_token oauth-token-response)
                                            (:oauth_token_secret oauth-token-response))))
 
@@ -61,9 +61,9 @@
 (defn authorize [callback]
   (let [consumer (oauth/make-consumer *app-token*
                                       *app-secret*
-                                      "http://api.twitter.com/oauth/request_token"
-                                      "http://api.twitter.com/oauth/access_token"
-                                      "http://api.twitter.com/oauth/authorize"
+                                      "https://api.twitter.com/oauth/request_token"
+                                      "https://api.twitter.com/oauth/access_token"
+                                      "https://api.twitter.com/oauth/authorize"
                                       :hmac-sha1)
         request-token (oauth/request-token consumer callback)
         redir-url (oauth/user-approval-uri consumer
@@ -72,16 +72,14 @@
       :request-token request-token} redir-url]))
 
 (defn access-token-response [consumer request-token oauth-verifier]
-  (oauth/access-token consumer 
+  (oauth/access-token consumer
                       request-token
                       oauth-verifier))
 
-(defn whosnotfollowingme [oauth-token-response] 
+(defn whosnotfollowingme [oauth-token-response]
   (usernames-table-body
     (doesnt-follow-me-back
       *app-token*
       *app-secret*
       (:oauth_token oauth-token-response)
       (:oauth_token_secret oauth-token-response))))
-
-
