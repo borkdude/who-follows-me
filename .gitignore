@@ -10,7 +10,7 @@ pom.xml
 /bin/
 .classpath
 .settings/ccw.repl.cmdhistory.prefs
-
 .lein-failures
-
 resources/app.config
+.lein-repl-history
+.nrepl-port

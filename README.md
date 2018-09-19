@@ -1,22 +1,18 @@
-# Who's not following me?
-Check out who are not following you on twitter while you are following
-them and vice versa.
+# Who follows me?
+Check out who follows you, but you're not following back and vice versa.
 
-Written in Clojure with the Ring, Compojure, Twitter-api and Enlive
-libraries (see `project.clj`).
+This webapp is hosted at this [site](https://twitter.michielborkent.nl). 
 
-This webapp is also hosted at this [site](http://twitter.michielborkent.nl). 
+## Configure
+Copy `config.example.edn` to `~/.wfm/config.edn` and fill in the blanks.
 
-## Usage
-Adapt `resources/app.config` to your needs. 
-To run:
-```bash
-lein ring server
-```
+## Run locally / develop
+
+    lein repl
+    (dev)
 
 ## License
 
-Copyright (C) 2013 Michiel Borkent
+See LICENSE
 
-Distributed under the Eclipse Public License, the same as Clojure.
-
+Copyright (C) 2013 - 2018 Michiel Borkent

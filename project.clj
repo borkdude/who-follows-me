@@ -1,16 +1,17 @@
- (defproject whosnotfollowingme "0.1.2-SNAPSHOT"
-   :description "FIXME: write this!"
-   :dependencies [[org.clojure/clojure "1.5.1"]
-                  [compojure "1.1.3"]
-                  [ring/ring-jetty-adapter "1.1.6"]
-                  [twitter-api "0.7.6"]
-                  ;; pulls in clj-oauth
-                  [enlive "1.0.1"]]
-                  ;;[me.raynes/laser "0.1.11"]
-   :ring {:handler whosnotfollowingme.handler/app}
-   :main whosnotfollowingme.handler
-   :profiles {:production
-              {:ring
-               {:open-browser? false, :stacktraces? false, :auto-reload? false}}}
-   :plugins [[lein-ring "0.8.3"]]
-   :min-lein-version "2.0.0")
+(defproject who-follows-me "0.1.0-SNAPSHOT"
+  :description "FIXME: write this!"
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [ring "1.7.0"]
+                 [ring-logger "1.0.1"]
+                 [ring-webjars "0.2.0"]
+                 [org.webjars/bootstrap "4.1.0"]
+                 [compojure "1.6.1"]
+                 [hiccup "1.0.5"]
+                 [twitter-api "1.8.0"]
+                 [clj-oauth "1.5.5"]
+                 [clj-http "3.9.1"]
+                 [com.taoensso/timbre "4.10.0"]
+                 [io.sentry/sentry-clj "0.7.2"]
+                 [org.clojure/core.memoize "0.7.1"]]
+  :main who-follows-me.handler
+  :min-lein-version "2.0.0")
