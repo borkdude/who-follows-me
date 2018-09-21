@@ -3,9 +3,11 @@
             [clojure.edn :as edn]
             [taoensso.timbre :refer [warn]]))
 
+(def wfm-dir
+  (str (System/getProperty "user.home") "/.wfm"))
+
 (def config-path
-  (str (System/getProperty "user.home")
-       "/.wfm/config.edn"))
+  (str wfm-dir "/config.edn"))
 
 (def config
   (memoize #(-> (io/file config-path)

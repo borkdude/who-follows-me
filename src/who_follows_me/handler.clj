@@ -61,8 +61,7 @@
   (timbre/merge-config!
    {:level :info
     :appenders {:rotor (rotor-appender
-                        {:path (str (System/getProperty "user.home")
-                                    "/.wfm/logs.log")
+                        {:path (str c/wfm-dir "/logs.log")
                          :max-size (* 512 1024)
                          :min-level :info})
                 :sentry (sentry-appender
