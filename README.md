@@ -13,6 +13,6 @@ Copy `config.example.edn` to `~/.wfm/config.edn` and fill in the blanks.
 
 ## License
 
-See LICENSE
-
 Copyright (C) 2013 - 2018 Michiel Borkent
+
+Distributed under the EPL License, same as Clojure. See LICENSE.
